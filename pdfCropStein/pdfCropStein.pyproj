@@ -982,6 +982,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="pdfCropStein.py" />
+    <Compile Include="SteinVision.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="paintingHist" />
