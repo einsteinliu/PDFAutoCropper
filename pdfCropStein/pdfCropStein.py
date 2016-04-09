@@ -10,16 +10,25 @@ from skimage import filters
 from os import listdir
 from os.path import isfile, join
 import SteinVision
+import PDFConvertor
+import os
 
-files = [f for f in listdir('test') if isfile(join('test', f))]
+saveFolder = "cropped"
 
+if not os.path.exists(saveFolder):
+    os.mkdir(saveFolder)
+
+#test pdf convertor
+#PDFConvertor.pdfToImages("LanguageOfArt.pdf","LanguageOfArt")
+
+PDFConvertor.imagesToPDF("cropped","cropped.pdf")
+files = [f for f in listdir('LanguageOfArt') if isfile(join('LanguageOfArt', f))]
 LONG_EDGE = 1000.0
 
-
 for file in files:
-    print join('test',file)
+    print join('LanguageOfArt',file)
     begin = datetime.datetime.now()
-    oriImage = io.imread(join('test',file),as_grey=True)
+    oriImage = io.imread(join('LanguageOfArt',file),as_grey=True)
 
     ratio = 1
     len = 1000
@@ -170,11 +179,11 @@ for file in files:
     #plt.waitforbuttonpress()
     ##plt.close()
     #sp = correctedImage.shape
-    io.imsave(file,correctedImage[ulBounds[0]:ulBounds[1],lrBounds[0]:lrBounds[1]])
+    io.imsave(saveFolder + "\\" + file,correctedImage[ulBounds[0]:ulBounds[1],lrBounds[0]:lrBounds[1]])
     print 'image ',file,' saved'
         #viewer = viewer.ImageViewer(correctedImage)
         #viewer.show()
-
+    
     end = datetime.datetime.now()
     cost = 1000 * (end - begin).total_seconds()
     print (cost)

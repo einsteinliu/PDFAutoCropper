@@ -981,6 +981,9 @@
     <Content Include="test.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PDFConvertor.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="pdfCropStein.py" />
     <Compile Include="SteinVision.py">
       <SubType>Code</SubType>
