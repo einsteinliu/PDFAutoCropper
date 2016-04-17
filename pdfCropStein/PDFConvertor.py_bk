@@ -1,0 +1,40 @@
+import pyPdf
+import sys
+import zlib
+from PIL import Image
+
+def pdfToImages(fileName):
+    images = []
+    pdf = pyPdf.PdfFileReader(file(fileName, "rb"))
+    for i in range(0,pdf.numPages):
+        page = pdf.getPage(i)
+        xObject = page['/Resources']['/XObject'].getObject()
+        for obj in xObject:
+            if xObject[obj]['/Subtype'] == '/Image':
+                size = (xObject[obj]['/Width'], xObject[obj]['/Height'])
+                data = xObject[obj]._data
+                if '/ColorSpace' in xObject[obj]:
+                     if xObject[obj]['/ColorSpace'] == '/DeviceRGB':
+                        mode = "RGB"
+                else:
+                    mode = "P"
+                   # size = ((int)(0.5*xObject[obj]['/Width']),(int)(0.5*xObject[obj]['/Height']))
+
+                if xObject[obj]['/Filter'] == '/FlateDecode':
+                    #
+                    allData = zlib.decompress(data)
+                    bytesNum = sys.getsizeof(allData)
+                    img = open("test.data","wb")
+                    img.write(allData)
+                    img.close()
+                    #img = Image.frombytes(mode, size, data)
+                    #img.save("LanguageOfArt\\" + obj[1:] + "%d.png" % i)
+                elif xObject[obj]['/Filter'] == '/DCTDecode':
+                    img = open("LanguageOfArt\\" + obj[1:] + "%d.jpg" % i, "wb")
+                    img.write(data)
+                    img.close()
+                elif xObject[obj]['/Filter'] == '/JPXDecode':
+                    img = open("LanguageOfArt\\" + obj[1:] + "%d.jp2" % i, "wb")
+                    img.write(data)
+                    img.close()
+    return images

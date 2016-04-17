@@ -1,3 +1,5 @@
+#!/usr/bin/python
+import sys
 import datetime
 import numpy
 import matplotlib.pyplot as plt
@@ -13,178 +15,207 @@ import SteinVision
 import PDFConvertor
 import os
 
-saveFolder = "cropped"
+if(len(sys.argv) <= 2):
+    print "no input arguments..."
+else:
+    if("convert" == sys.argv[1]):
+        print sys.argv
+        if(".pdf" in sys.argv[2]):
+            pdfFile = sys.argv[2]
+            imageFolder = os.path.splitext(os.path.basename(pdfFile))[0]
+            print "convert ",pdfFile," to ",imageFolder
+            PDFConvertor.pdfToImages(pdfFile,imageFolder)
+        else:
+            imageFolder = sys.argv[2]
+            pdfFile = imageFolder.replace(' ','') + ".pdf"
+            PDFConvertor.imagesToPDF(imageFolder,pdfFile)
+    elif(("crop" == sys.argv[1]) or ("split"==sys.argv[1])):
+        imageFolder = sys.argv[2]
+        startPage = ""
+        if(len(sys.argv)==4):
+            startPage = sys.argv[3]
+        saveFolder = imageFolder + "_cropped"
+        if(os.path.exists(saveFolder)):
+            print saveFolder,"already exists, please check"
+        else:
+            os.mkdir(saveFolder)
+        files = [f for f in listdir(imageFolder) if isfile(join(imageFolder, f))]
+        LONG_EDGE = 1000.0
+        
+        n = 0
+        for file in files:
+            print join(imageFolder,file)
+            begin = datetime.datetime.now()
+            oriImage = io.imread(join(imageFolder,file),as_grey=True)
 
-if not os.path.exists(saveFolder):
-    os.mkdir(saveFolder)
+            if("crop" == sys.argv[1]):
+                if(os.path.exists(saveFolder + "\\" + file)):
+                                print saveFolder+"\\"+file," already exists.."
+                                continue
+                ratio = 1
+                len = 1000
+                if(oriImage.shape[0] > oriImage.shape[1]):
+                    len = oriImage.shape[0]
+                else:
+                    len = oriImage.shape[1]
 
-#test pdf convertor
-#PDFConvertor.pdfToImages("LanguageOfArt.pdf","LanguageOfArt")
+                if(len > LONG_EDGE):
+                    ratio = LONG_EDGE / len
+                if(ratio != 1):
+                    image = transform.rescale(oriImage,ratio)
 
-PDFConvertor.imagesToPDF("cropped","cropped.pdf")
-files = [f for f in listdir('LanguageOfArt') if isfile(join('LanguageOfArt', f))]
-LONG_EDGE = 1000.0
+                image = 1.0 - image
 
-for file in files:
-    print join('LanguageOfArt',file)
-    begin = datetime.datetime.now()
-    oriImage = io.imread(join('LanguageOfArt',file),as_grey=True)
+                #####################################
+                begin = datetime.datetime.now()
+                rohThetas = range(87,93)
+                centerAngle = SteinVision.computeBestAngle(image,rohThetas)
+                fineThetas = []
+                fineThetas.append(centerAngle)
+                for i in range(1,11):
+                    fineThetas.append(-0.05 * i + centerAngle)
+                for i in range(1,11):
+                    fineThetas.append(0.05 * i + centerAngle)
+                bestAngle = SteinVision.computeBestAngle(image,fineThetas)
+                end = datetime.datetime.now()
+                cost = 1000 * (end - begin).total_seconds()
+                print 'new proj method time:',cost
+                print 'best angle:', bestAngle
+                #####################################
 
-    ratio = 1
-    len = 1000
-    if(oriImage.shape[0] > oriImage.shape[1]):
-        len = oriImage.shape[0]
-    else:
-        len = oriImage.shape[1]
+                #rohThetas = range(87,93)
+                #projs = transform.radon(image, theta=rohThetas, circle=False)
+                #projs = projs.transpose()
+                #lProjs = projs[0:6,0:projs.shape[1] - 1]
+                #rProjs = projs[0:6,1:projs.shape[1]]
+                #projs = rProjs - lProjs
 
-    if(len > LONG_EDGE):
-        ratio = LONG_EDGE / len
-    if(ratio != 1):
-        image = transform.rescale(oriImage,ratio)
+                #centerAngle = 0
+                #max = 0
+                #for i in range(0, projs.shape[0]):
+                #    proj = projs[i]
+                #    #plt.plot(proj)
+                #    #plt.show()
+                #    #plt.waitforbuttonpress()
+                #    #plt.close()
+                #    currMax = numpy.max(proj)
+                #    print currMax
+                #    if(currMax > max):
+                #        max = currMax
+                #        centerAngle = float(rohThetas[i])
 
-    image = 1.0 - image
+                #print 'Center angle:',centerAngle
 
-    #####################################
-    begin = datetime.datetime.now()
-    rohThetas = range(87,93)
-    centerAngle = SteinVision.computeBestAngle(image,rohThetas)
-    fineThetas = []
-    fineThetas.append(centerAngle)
-    for i in range(1,11):
-        fineThetas.append(-0.05 * i + centerAngle)
-    for i in range(1,11):
-        fineThetas.append(0.05 * i + centerAngle)
-    bestAngle = SteinVision.computeBestAngle(image,fineThetas)
-    end = datetime.datetime.now()
-    cost = 1000 * (end - begin).total_seconds()
-    print 'new proj method time:',cost
-    print 'best angle:', bestAngle
-    #####################################
+                #fineThetas = []
+                #fineThetas.append(centerAngle)
+                #for i in range(1,11):
+                #    fineThetas.append(-0.05 * i + centerAngle)
+                #for i in range(1,11):
+                #    fineThetas.append(0.05 * i + centerAngle)
+                ##########################
+                ##projs = transform.radon(image, theta=fineThetas, circle=False)
+                ##projs = projs.transpose()
+                ##lProjs = projs[0:22,0:projs.shape[1] - 1]
+                ##rProjs = projs[0:22,1:projs.shape[1]]
+                ##projs = rProjs - lProjs
+                ##max = 0
+                ##for i in range(0, projs.shape[0]):
+                ##    proj = projs[i]
+                ##    currMax = numpy.max(proj)
+                ##    if(currMax > max):
+                ##        max = currMax
+                ##        centerAngle = float(fineThetas[i])
 
-    #rohThetas = range(87,93)
-    #projs = transform.radon(image, theta=rohThetas, circle=False)
-    #projs = projs.transpose()
-    #lProjs = projs[0:6,0:projs.shape[1] - 1]
-    #rProjs = projs[0:6,1:projs.shape[1]]
-    #projs = rProjs - lProjs
+                ##end = datetime.datetime.now()
+                ##cost = 1000 * (end - begin).total_seconds()
+                ##print (cost),'finish'
+                ##############################
+                #centerAngles = []
+                #centerAngles.append(centerAngle)
+                #centerAngles.append(fineThetas[1])
+                #centerAngles.append(fineThetas[11])
 
-    #centerAngle = 0
-    #max = 0
-    #for i in range(0, projs.shape[0]):
-    #    proj = projs[i]
-    #    #plt.plot(proj)
-    #    #plt.show()
-    #    #plt.waitforbuttonpress()
-    #    #plt.close()
-    #    currMax = numpy.max(proj)
-    #    print currMax
-    #    if(currMax > max):
-    #        max = currMax
-    #        centerAngle = float(rohThetas[i])
+                #projs = transform.radon(image, theta=centerAngles, circle=False)
+                #projs = projs.transpose()
+                #lProjs = projs[0:3,0:projs.shape[1] - 1]
+                #rProjs = projs[0:3,1:projs.shape[1]]
+                #projs = rProjs - lProjs
 
-    #print 'Center angle:',centerAngle
+                #max
+                #lMax = numpy.max(projs[1])
+                #cMax = numpy.max(projs[0])
+                #rMax = numpy.max(projs[2])
 
-    #fineThetas = []
-    #fineThetas.append(centerAngle)
-    #for i in range(1,11):
-    #    fineThetas.append(-0.05 * i + centerAngle)
-    #for i in range(1,11):
-    #    fineThetas.append(0.05 * i + centerAngle)
-    ##########################
-    ##projs = transform.radon(image, theta=fineThetas, circle=False)
-    ##projs = projs.transpose()
-    ##lProjs = projs[0:22,0:projs.shape[1] - 1]
-    ##rProjs = projs[0:22,1:projs.shape[1]]
-    ##projs = rProjs - lProjs
-    ##max  = 0
-    ##for i in range(0, projs.shape[0]):
-    ##    proj = projs[i]
-    ##    currMax = numpy.max(proj)
-    ##    if(currMax > max):
-    ##        max = currMax
-    ##        centerAngle = float(fineThetas[i])
+                #fineAngles = []
+                #bestAngle = 0
+                #if (cMax > lMax) and (cMax > rMax):
+                #    bestAngle = centerAngle
+                #    max = cMax
+                #elif lMax > cMax:
+                #    fineAngles = fineThetas[2:11]
+                #    bestAngle = fineThetas[1]
+                #    max = lMax
+                #else:
+                #    fineAngles = fineThetas[12:21]
+                #    bestAngle = fineThetas[11]
+                #    max = rMax
 
-    ##end = datetime.datetime.now()
-    ##cost = 1000 * (end - begin).total_seconds()
-    ##print (cost),'finish'
-    ##############################
-    #centerAngles = []
-    #centerAngles.append(centerAngle)
-    #centerAngles.append(fineThetas[1])
-    #centerAngles.append(fineThetas[11])
+                #k = numpy.array(fineAngles).shape[0]
+                #for i in range(0, k):
+                #    currAngle = [fineAngles[i]]
+                #    proj = transform.radon(image, theta=currAngle, circle=False)
+                #    lProj = proj[0:proj.shape[0] - 1,0]
+                #    rProj = proj[1:proj.shape[0],0]
+                #    proj = rProj - lProj
+                #    currMax = numpy.max(proj)
+                #    if(currMax > max):
+                #        max = currMax
+                #        bestAngle = float(currAngle[0])
+                #    else:
+                #        break
 
-    #projs = transform.radon(image, theta=centerAngles, circle=False)
-    #projs = projs.transpose()
-    #lProjs = projs[0:3,0:projs.shape[1] - 1]
-    #rProjs = projs[0:3,1:projs.shape[1]]
-    #projs = rProjs - lProjs
+                #print 'Best angle:',bestAngle
+                bestAngle -= 90
+                #plt.ion()
 
-    #max
-    #lMax = numpy.max(projs[1])
-    #cMax = numpy.max(projs[0])
-    #rMax = numpy.max(projs[2])
-
-    #fineAngles = []
-    #bestAngle = 0
-    #if (cMax > lMax) and (cMax > rMax):
-    #    bestAngle = centerAngle
-    #    max = cMax
-    #elif lMax > cMax:
-    #    fineAngles = fineThetas[2:11]
-    #    bestAngle = fineThetas[1]
-    #    max = lMax
-    #else:
-    #    fineAngles = fineThetas[12:21]
-    #    bestAngle = fineThetas[11]
-    #    max = rMax
-
-    #k = numpy.array(fineAngles).shape[0]
-    #for i in range(0, k):
-    #    currAngle = [fineAngles[i]]
-    #    proj = transform.radon(image, theta=currAngle, circle=False)
-    #    lProj = proj[0:proj.shape[0] - 1,0]
-    #    rProj = proj[1:proj.shape[0],0]
-    #    proj = rProj - lProj
-    #    currMax = numpy.max(proj)
-    #    if(currMax > max):
-    #        max = currMax
-    #        bestAngle = float(currAngle[0])
-    #    else:
-    #        break
-
-    #print 'Best angle:',bestAngle
-    bestAngle -= 90
-    #plt.ion()
-
-    if(abs(bestAngle) > 0.2):
-        correctedImage = transform.rotate(oriImage,bestAngle)
-        bd = int(len * numpy.tan(abs(bestAngle * numpy.pi / 180.0))) + 1
-        correctedImage[0:bd+1,0:correctedImage.shape[1]] = 1
-        correctedImage[correctedImage.shape[0] - bd:correctedImage.shape[0],0:correctedImage.shape[1]] = 1
-        correctedImage[0:correctedImage.shape[0],0:bd+1] = 1
-        correctedImage[0:correctedImage.shape[0],correctedImage.shape[1] - bd:correctedImage.shape[1]] = 1
-    else:
-        correctedImage = oriImage
+                if(abs(bestAngle) > 0.2):
+                    correctedImage = transform.rotate(oriImage,bestAngle)
+                    bd = int(len * numpy.tan(abs(bestAngle * numpy.pi / 180.0))) + 1
+                    correctedImage[0:bd + 1,0:correctedImage.shape[1]] = 1
+                    correctedImage[correctedImage.shape[0] - bd:correctedImage.shape[0],0:correctedImage.shape[1]] = 1
+                    correctedImage[0:correctedImage.shape[0],0:bd + 1] = 1
+                    correctedImage[0:correctedImage.shape[0],correctedImage.shape[1] - bd:correctedImage.shape[1]] = 1
+                else:
+                    correctedImage = oriImage
    
-    proj = (1.0-correctedImage).sum(axis=0)
-    lrBounds = SteinVision.getCenterPart(proj)
+                proj = (1.0 - correctedImage).sum(axis=0)
+                lrBounds = SteinVision.getCenterPart(proj)
 
-    proj = (1.0-correctedImage).sum(axis=1)
-    ulBounds = SteinVision.getCenterPartB(proj)
+                proj = (1.0 - correctedImage).sum(axis=1)
+                ulBounds = SteinVision.getCenterPartB(proj)
 
-    ##cp = proj[bounds[0]:bounds[1]]
-    #plt.plot(proj[ulBounds[0]:ulBounds[1]])
-    ##plt.plot((1.0-correctedImage).sum(axis=0))
-    #plt.show()
-    #plt.waitforbuttonpress()
-    ##plt.close()
-    #sp = correctedImage.shape
-    io.imsave(saveFolder + "\\" + file,correctedImage[ulBounds[0]:ulBounds[1],lrBounds[0]:lrBounds[1]])
-    print 'image ',file,' saved'
-        #viewer = viewer.ImageViewer(correctedImage)
-        #viewer.show()
+                ##cp = proj[bounds[0]:bounds[1]]
+                #plt.plot(proj[ulBounds[0]:ulBounds[1]])
+                ##plt.plot((1.0-correctedImage).sum(axis=0))
+                #plt.show()
+                #plt.waitforbuttonpress()
+                ##plt.close()
+                #sp = correctedImage.shape
+                io.imsave(saveFolder + "\\" + file,correctedImage[ulBounds[0]:ulBounds[1],lrBounds[0]:lrBounds[1]])
+                print 'image ',file,' saved'
+            elif("split" == sys.argv[1]):
+                n = n + 1
+                file = imageFolder+"-"+str(n)+".jpg"
+                io.imsave(saveFolder + "\\" + file,oriImage[0:oriImage.shape[0],0:oriImage.shape[1]/2])
+                n = n + 1
+                file = imageFolder+"-"+str(n)+".jpg"
+                io.imsave(saveFolder + "\\" + file,oriImage[0:oriImage.shape[0],oriImage.shape[1]/2:oriImage.shape[1]])
+                print 'image ',file,' saved'    
+            
+                #viewer = viewer.ImageViewer(correctedImage)
+                #viewer.show()
     
-    end = datetime.datetime.now()
-    cost = 1000 * (end - begin).total_seconds()
-    print (cost)
-    print ''
+            end = datetime.datetime.now()
+            cost = 1000 * (end - begin).total_seconds()
+            print (cost)
+            print ''

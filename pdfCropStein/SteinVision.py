@@ -28,7 +28,8 @@ def computeBestAngle(image, angles):
         if(currMax>max):
             max = currMax
             bestAngle = angle
-
+    if(0==max):
+        bestAngle = 90
     return bestAngle
 
 def getCenterPartB(proj):
