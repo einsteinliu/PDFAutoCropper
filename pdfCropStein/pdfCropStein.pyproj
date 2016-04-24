@@ -985,6 +985,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="pdfCropStein.py" />
+    <Compile Include="SteinTimer.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="SteinVision.py">
       <SubType>Code</SubType>
     </Compile>

@@ -11,6 +11,7 @@ from skimage import color
 from skimage import filters
 from os import listdir
 from os.path import isfile, join
+from SteinTimer import SteinTimer
 import SteinVision
 import PDFConvertor
 import TextDetector
@@ -21,8 +22,12 @@ if(len(sys.argv) <= 2):
     files = [f for f in listdir(imageFolder) if isfile(join(imageFolder, f))]
     file = files[3]
     join(imageFolder,file)
+    timer = SteinTimer()
+    timer.start()
     oriImage = io.imread(join(imageFolder,file),as_grey=True)
-    TextDetector.getTextBlock(oriImage)
+    TextDetector.getTextBlock(transform.rescale(oriImage,0.3))
+    timer.stop()
+    print "all time cost:",timer.elapsed()
 else:
     if("convert" == sys.argv[1]):
         print sys.argv
