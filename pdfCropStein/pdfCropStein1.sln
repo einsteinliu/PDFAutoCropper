@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "pdfCropStein", "pdfCropStein.pyproj", "{27F02875-FEBB-44B2-8C9C-50095A396CED}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFAutoCropper", "PDFAutoCropper\PDFAutoCropper.csproj", "{DA5B5539-79CA-46BE-972E-FC9CDC7BB028}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,20 +29,6 @@ Global
 		{27F02875-FEBB-44B2-8C9C-50095A396CED}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{27F02875-FEBB-44B2-8C9C-50095A396CED}.Release|x64.ActiveCfg = Release|Any CPU
 		{27F02875-FEBB-44B2-8C9C-50095A396CED}.Release|x86.ActiveCfg = Release|Any CPU
-		{DA5B5539-79CA-46BE-972E-FC9CDC7BB028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA5B5539-79CA-46BE-972E-FC9CDC7BB028}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA5B5539-79CA-46BE-972E-FC9CDC7BB028}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{DA5B5539-79CA-46BE-972E-FC9CDC7BB028}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{DA5B5539-79CA-46BE-972E-FC9CDC7BB028}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{DA5B5539-79CA-46BE-972E-FC9CDC7BB028}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{DA5B5539-79CA-46BE-972E-FC9CDC7BB028}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DA5B5539-79CA-46BE-972E-FC9CDC7BB028}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA5B5539-79CA-46BE-972E-FC9CDC7BB028}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA5B5539-79CA-46BE-972E-FC9CDC7BB028}.Release|ARM.ActiveCfg = Release|Any CPU
-		{DA5B5539-79CA-46BE-972E-FC9CDC7BB028}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{DA5B5539-79CA-46BE-972E-FC9CDC7BB028}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{DA5B5539-79CA-46BE-972E-FC9CDC7BB028}.Release|x64.ActiveCfg = Release|Any CPU
-		{DA5B5539-79CA-46BE-972E-FC9CDC7BB028}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

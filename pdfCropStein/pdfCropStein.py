@@ -13,10 +13,16 @@ from os import listdir
 from os.path import isfile, join
 import SteinVision
 import PDFConvertor
+import TextDetector
 import os
 
 if(len(sys.argv) <= 2):
-    print "no input arguments..."
+    imageFolder = "lightroom"
+    files = [f for f in listdir(imageFolder) if isfile(join(imageFolder, f))]
+    file = files[3]
+    join(imageFolder,file)
+    oriImage = io.imread(join(imageFolder,file),as_grey=True)
+    TextDetector.getTextBlock(oriImage)
 else:
     if("convert" == sys.argv[1]):
         print sys.argv
@@ -105,7 +111,7 @@ else:
                 #        centerAngle = float(rohThetas[i])
 
                 #print 'Center angle:',centerAngle
-
+                
                 #fineThetas = []
                 #fineThetas.append(centerAngle)
                 #for i in range(1,11):

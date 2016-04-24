@@ -988,6 +988,9 @@
     <Compile Include="SteinVision.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TextDetector.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="paintingHist" />
