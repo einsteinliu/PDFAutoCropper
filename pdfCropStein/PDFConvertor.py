@@ -47,7 +47,8 @@ def imagesToPDF(imageFolder, pdfFile):
             curr = max
 
         fileIndex = 0
-
+        
+        allPDFfiles = []
         while(curr<=max):
            fileIndex = fileIndex + 1
            print "convert page ",str(start)," to ",str(curr)
@@ -60,14 +61,14 @@ def imagesToPDF(imageFolder, pdfFile):
            start = curr + 1
            curr = start + 50
 
-           fileIndex = fileIndex + 1
-           print "convert page ",str(start)," to ",str(max)
-           ars = "convert "
-           for page in range(start,max+1):
-              file = vorName + "-" + str(page) + ".jpg"
-              ars = ars + join(imageFolder,file) + " "
-           ars = ars + imageFolder + str(fileIndex) + ".pdf"
-           os.system(ars)
+        fileIndex = fileIndex + 1
+        print "convert page ",str(start)," to ",str(max)
+        ars = "convert "
+        for page in range(start,max+1):
+            file = vorName + "-" + str(page) + ".jpg"
+            ars = ars + join(imageFolder,file) + " "
+        ars = ars + imageFolder + str(fileIndex) + ".pdf"
+        os.system(ars)
 
         print "All images in ",imageFolder," converted to ",pdfFile
         return

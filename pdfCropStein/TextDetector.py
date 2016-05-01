@@ -47,12 +47,15 @@ def checkIsTextBlock(image):
 
 def detectAllTextBlock(image):
     cellSize = (int)(image.shape[0]*0.1)
+    if(cellSize<15):
+        cellSize = 15
     currCellX = 0
     currCellY = 0
     textCells = []
     plt.ion()
     nextX = 0
     nextY = 0
+    
     while(currCellX<image.shape[0]):
         currCellXEnd = currCellX + cellSize
         nextX = currCellXEnd
@@ -66,24 +69,25 @@ def detectAllTextBlock(image):
                 nextY = 0
             #print currCellX,":",currCellXEnd,"         ",currCellY,":",currCellYEnd
             if(checkIsTextBlock(image[currCellX:currCellXEnd,currCellY:currCellYEnd])):
-                #plt.imshow(image[currCellX:currCellXEnd,currCellY:currCellYEnd],cmap='Greys_r')
-                #plt.show();
-                #plt.waitforbuttonpress()
-                #plt.close()
-                textCells.append([currCellX,currCellXEnd,currCellY,currCellYEnd])
+                    #print textXMin
+                    #plt.imshow(image[currCellX:currCellXEnd,currCellY:currCellYEnd],cmap='Greys_r')
+                    #plt.show();
+                    #plt.waitforbuttonpress()
+                    #plt.close()
+                    textCells.append([currCellX,currCellXEnd,currCellY,currCellYEnd])
             currCellY = nextY
             if(nextY == 0):
                 break
         currCellX = nextX
-
+    #print textCells
     return textCells
 
 def getTextBlock(image):
     timer = SteinTimer()
     timer.start()
-    detectAllTextBlock(image)
+    textBox = detectAllTextBlock(image)
     timer.stop()
     print "time cost: ",timer.elapsed()
-    return image
+    return textBox
 
 

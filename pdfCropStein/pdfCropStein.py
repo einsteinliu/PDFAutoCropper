@@ -19,15 +19,21 @@ import os
 
 if(len(sys.argv) <= 2):
     imageFolder = "lightroom"
+    saveFolder  = "lightroom_cropped"
     files = [f for f in listdir(imageFolder) if isfile(join(imageFolder, f))]
-    file = files[3]
-    join(imageFolder,file)
-    timer = SteinTimer()
-    timer.start()
-    oriImage = io.imread(join(imageFolder,file),as_grey=True)
-    TextDetector.getTextBlock(transform.rescale(oriImage,0.3))
-    timer.stop()
-    print "all time cost:",timer.elapsed()
+    
+    for file in files:
+        timer = SteinTimer()
+        timer.start()
+        oriImage = io.imread(join(imageFolder,file),as_grey=True)
+        textBoxes = TextDetector.detectAllTextBlock(transform.rescale(oriImage,0.4))  
+        print textBoxes[0]
+        #plt.imshow(oriImage[textBox[0]*2.5:textBox[1]*2.5,textBox[2]*2.5:textBox[3]*2.5],cmap='Greys_r')
+        #plt.show()
+        #plt.waitforbuttonpress()
+        #plt.close()
+        timer.stop()
+        print "time cost:",timer.elapsed()
 else:
     if("convert" == sys.argv[1]):
         print sys.argv
@@ -76,7 +82,7 @@ else:
                     image = transform.rescale(oriImage,ratio)
 
                 image = 1.0 - image
-
+                
                 #####################################
                 begin = datetime.datetime.now()
                 rohThetas = range(87,93)
@@ -93,7 +99,6 @@ else:
                 print 'new proj method time:',cost
                 print 'best angle:', bestAngle
                 #####################################
-
                 #rohThetas = range(87,93)
                 #projs = transform.radon(image, theta=rohThetas, circle=False)
                 #projs = projs.transpose()
@@ -187,7 +192,7 @@ else:
 
                 #print 'Best angle:',bestAngle
                 bestAngle -= 90
-                #plt.ion()
+                plt.ion()
 
                 if(abs(bestAngle) > 0.2):
                     correctedImage = transform.rotate(oriImage,bestAngle)
@@ -198,12 +203,20 @@ else:
                     correctedImage[0:correctedImage.shape[0],correctedImage.shape[1] - bd:correctedImage.shape[1]] = 1
                 else:
                     correctedImage = oriImage
-   
+
+                textBoxes = TextDetector.detectAllTextBlock(correctedImage)  
                 proj = (1.0 - correctedImage).sum(axis=0)
-                lrBounds = SteinVision.getCenterPart(proj)
+                lrBounds = SteinVision.getTextPart(proj,textBoxes,1)
+                #lrBounds = SteinVision.getCenterPart(proj)
+                #proj = SteinVision.averageFilter(proj,10)
+                #plt.plot(proj)
+                #plt.show()
+                #plt.waitforbuttonpress()
+                #plt.close()
 
                 proj = (1.0 - correctedImage).sum(axis=1)
-                ulBounds = SteinVision.getCenterPartB(proj)
+                ulBounds = SteinVision.getTextPart(proj,textBoxes,0)
+                #ulBounds = SteinVision.getCenterPartB(proj)
 
                 ##cp = proj[bounds[0]:bounds[1]]
                 #plt.plot(proj[ulBounds[0]:ulBounds[1]])

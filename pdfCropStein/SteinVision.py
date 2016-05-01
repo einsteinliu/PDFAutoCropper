@@ -32,6 +32,12 @@ def computeBestAngle(image, angles):
         bestAngle = 90
     return bestAngle
 
+
+def averageFilter(proj,num):
+    for i in range(0,proj.shape[0]-num):
+        proj[i] = sum(proj[i:i+num])/num
+    return proj
+
 def getCenterPartB(proj):
     max = numpy.max(proj)
     threshold = 0.05*max
@@ -57,6 +63,30 @@ def getCenterPartB(proj):
         lowerBound = proj.shape[0]-1
     
     return [upperBound,lowerBound]
+
+def getTextPart(proj,textCells,index):
+    leftBound = 9999
+    rightBound = 0
+    threshold = 10
+    for cell in textCells:
+        currLeft = cell[index*2]
+        currRight = cell[index*2+1]
+        for l in range(0,currLeft):
+            curr = currLeft - l
+            if((proj[curr]>threshold) and (curr<leftBound)):
+                leftBound = curr
+        for curr in range(currRight,proj.shape[0]):
+            if((proj[curr]>threshold) and (curr>rightBound)):
+                rightBound = curr
+    if(leftBound == 9999):
+        leftBound = 0
+    if(rightBound == 0):
+        rightBound = proj.shape[0]-1
+    if(leftBound>10):
+        leftBound = leftBound - 10
+    if(rightBound<(proj.shape[0]-10)):
+        rightBound = rightBound + 10
+    return [leftBound,rightBound]
 
 def getCenterPart(proj):
     leftBound = 0
