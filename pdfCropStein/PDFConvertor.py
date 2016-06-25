@@ -58,6 +58,7 @@ def imagesToPDF(imageFolder, pdfFile):
              ars = ars + join(imageFolder,file) + " "
            ars = ars + imageFolder + str(fileIndex) + ".pdf"
            os.system(ars)
+           allPDFfiles.append(imageFolder+str(fileIndex)+".pdf")
            start = curr + 1
            curr = start + 50
 
@@ -68,7 +69,12 @@ def imagesToPDF(imageFolder, pdfFile):
             file = vorName + "-" + str(page) + ".jpg"
             ars = ars + join(imageFolder,file) + " "
         ars = ars + imageFolder + str(fileIndex) + ".pdf"
+        allPDFfiles.append(imageFolder+str(fileIndex)+".pdf")
         os.system(ars)
-
+        
+        mergeArs = "gswin64 -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=" + pdfFile + " -dBATCH"
+        for file in allPDFfiles:
+            mergeArs = mergeArs + " " + file
+        os.system(mergeArs)
         print "All images in ",imageFolder," converted to ",pdfFile
         return

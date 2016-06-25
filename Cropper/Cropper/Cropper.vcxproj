@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9FF0D5FF-6C26-45E7-A449-9B97ABD34A40}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Cropper</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\OpenCV3\opencv\sources\modules\xfeatures2d\include;C:\OpenCV3\opencv\sources\modules\ocl\include;C:\OpenCV3\opencv\sources\modules\cudacodec\include;C:\OpenCV3\opencv\sources\modules\gpu\src\nvidia\core;C:\OpenCV3\opencv\sources\modules\gpu\src\nvidia;C:\OpenCV3\opencv\sources\modules\cudalegacy\include;C:\OpenCV3\opencv\sources\modules\calib3d\include;C:\OpenCV3\opencv\sources\modules\features2d\include;C:\OpenCV3\opencv\sources\modules\objdetect\include;C:\OpenCV3\opencv\sources\modules\highgui\include;C:\OpenCV3\opencv\sources\modules\videoio\include;C:\OpenCV3\opencv\sources\modules\imgcodecs\include;C:\OpenCV3\opencv\sources\modules\cudawarping\include;C:\OpenCV3\opencv\sources\modules\cudaimgproc\include;C:\OpenCV3\opencv\sources\modules\cudafilters\include;C:\OpenCV3\opencv\sources\modules\video\include;C:\OpenCV3\opencv\sources\modules\ml\include;C:\OpenCV3\opencv\sources\modules\imgproc\include;C:\OpenCV3\opencv\sources\modules\flann\include;C:\OpenCV3\opencv\sources\modules\cudaarithm\include;C:\OpenCV3\opencv\sources\modules\core\include;C:\OpenCV3\opencv\sources\modules\cudev\include;C:\OpenCV3\opencv\sources\modules\cudaoptflow\include;C:\OpenCV3\opencv\sources\modules\cudaobjdetect\include;C:\OpenCV3\opencv\sources\modules\cudastereo\include;C:\OpenCV3\opencv\sources\modules\cudabgsegm\include;C:\OpenCV3\opencv\sources\modules\cudafeatures2d\include;C:\OpenCV3\opencv\sources\modules\superres\include;C:\OpenCV3\opencv\sources\3rdparty\ippicv\unpack\ippicv_win\include;C:\OpenCV3\build;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64;C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;C:\OpenCV3\opencv\sources\3rdparty\ippicv\unpack\ippicv_win\lib\intel64\ippicvmt.lib;cudart.lib;nppc.lib;nppi.lib;npps.lib;cufft.lib;-LC:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64;..\..\lib\Debug\opencv_superres310d.lib;..\..\lib\Debug\opencv_cudafeatures2d310d.lib;..\..\lib\Debug\opencv_cudaoptflow310d.lib;..\..\lib\Debug\opencv_cudabgsegm310d.lib;..\..\lib\Debug\opencv_cudastereo310d.lib;..\..\lib\Debug\opencv_cudaobjdetect310d.lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64\cuda.lib;..\..\lib\Debug\opencv_xfeatures2d310d.lib;..\..\lib\Debug\opencv_cudacodec310d.lib;..\..\lib\Debug\opencv_cudawarping310d.lib;..\..\lib\Debug\opencv_cudalegacy310d.lib;..\..\lib\Debug\opencv_objdetect310d.lib;..\..\lib\Debug\opencv_cudaimgproc310d.lib;..\..\lib\Debug\opencv_cudafilters310d.lib;..\..\lib\Debug\opencv_calib3d310d.lib;..\..\lib\Debug\opencv_features2d310d.lib;..\..\lib\Debug\opencv_flann310d.lib;..\..\lib\Debug\opencv_highgui310d.lib;..\..\lib\Debug\opencv_videoio310d.lib;..\..\lib\Debug\opencv_imgcodecs310d.lib;..\..\lib\Debug\opencv_ml310d.lib;..\..\lib\Debug\opencv_cudaarithm310d.lib;..\..\lib\Debug\opencv_shape310d.lib;..\..\lib\Debug\opencv_video310d.lib;..\..\lib\Debug\opencv_imgproc310d.lib;..\..\lib\Debug\opencv_core310d.lib;..\..\lib\Debug\opencv_cudev310d.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\OpenCV3\opencv\sources\modules\xfeatures2d\include;C:\OpenCV3\opencv\sources\modules\ocl\include;C:\OpenCV3\opencv\sources\modules\cudacodec\include;C:\OpenCV3\opencv\sources\modules\gpu\src\nvidia\core;C:\OpenCV3\opencv\sources\modules\gpu\src\nvidia;C:\OpenCV3\opencv\sources\modules\cudalegacy\include;C:\OpenCV3\opencv\sources\modules\calib3d\include;C:\OpenCV3\opencv\sources\modules\features2d\include;C:\OpenCV3\opencv\sources\modules\objdetect\include;C:\OpenCV3\opencv\sources\modules\highgui\include;C:\OpenCV3\opencv\sources\modules\videoio\include;C:\OpenCV3\opencv\sources\modules\imgcodecs\include;C:\OpenCV3\opencv\sources\modules\cudawarping\include;C:\OpenCV3\opencv\sources\modules\cudaimgproc\include;C:\OpenCV3\opencv\sources\modules\cudafilters\include;C:\OpenCV3\opencv\sources\modules\video\include;C:\OpenCV3\opencv\sources\modules\ml\include;C:\OpenCV3\opencv\sources\modules\imgproc\include;C:\OpenCV3\opencv\sources\modules\flann\include;C:\OpenCV3\opencv\sources\modules\cudaarithm\include;C:\OpenCV3\opencv\sources\modules\core\include;C:\OpenCV3\opencv\sources\modules\cudev\include;C:\OpenCV3\opencv\sources\modules\cudaoptflow\include;C:\OpenCV3\opencv\sources\modules\cudaobjdetect\include;C:\OpenCV3\opencv\sources\modules\cudastereo\include;C:\OpenCV3\opencv\sources\modules\cudabgsegm\include;C:\OpenCV3\opencv\sources\modules\cudafeatures2d\include;C:\OpenCV3\opencv\sources\modules\superres\include;C:\OpenCV3\opencv\sources\3rdparty\ippicv\unpack\ippicv_win\include;C:\OpenCV3\build;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64;C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;C:\OpenCV3\opencv\sources\3rdparty\ippicv\unpack\ippicv_win\lib\intel64\ippicvmt.lib;cudart.lib;nppc.lib;nppi.lib;npps.lib;cufft.lib;-LC:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64;..\..\lib\Debug\opencv_superres310d.lib;..\..\lib\Debug\opencv_cudafeatures2d310d.lib;..\..\lib\Debug\opencv_cudaoptflow310d.lib;..\..\lib\Debug\opencv_cudabgsegm310d.lib;..\..\lib\Debug\opencv_cudastereo310d.lib;..\..\lib\Debug\opencv_cudaobjdetect310d.lib;..\..\lib\Debug\opencv_xfeatures2d310d.lib;..\..\lib\Debug\opencv_cudacodec310d.lib;..\..\lib\Debug\opencv_cudawarping310d.lib;..\..\lib\Debug\opencv_cudalegacy310d.lib;..\..\lib\Debug\opencv_objdetect310d.lib;..\..\lib\Debug\opencv_cudaimgproc310d.lib;..\..\lib\Debug\opencv_cudafilters310d.lib;..\..\lib\Debug\opencv_calib3d310d.lib;..\..\lib\Debug\opencv_features2d310d.lib;..\..\lib\Debug\opencv_flann310d.lib;..\..\lib\Debug\opencv_highgui310d.lib;..\..\lib\Debug\opencv_videoio310d.lib;..\..\lib\Debug\opencv_imgcodecs310d.lib;..\..\lib\Debug\opencv_ml310d.lib;..\..\lib\Debug\opencv_cudaarithm310d.lib;..\..\lib\Debug\opencv_shape310d.lib;..\..\lib\Debug\opencv_video310d.lib;..\..\lib\Debug\opencv_imgproc310d.lib;..\..\lib\Debug\opencv_core310d.lib;..\..\lib\Debug\opencv_cudev310d.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\OpenCV3\opencv\sources\modules\xfeatures2d\include;C:\OpenCV3\opencv\sources\modules\ocl\include;C:\OpenCV3\opencv\sources\modules\cudacodec\include;C:\OpenCV3\opencv\sources\modules\gpu\src\nvidia\core;C:\OpenCV3\opencv\sources\modules\gpu\src\nvidia;C:\OpenCV3\opencv\sources\modules\cudalegacy\include;C:\OpenCV3\opencv\sources\modules\calib3d\include;C:\OpenCV3\opencv\sources\modules\features2d\include;C:\OpenCV3\opencv\sources\modules\objdetect\include;C:\OpenCV3\opencv\sources\modules\highgui\include;C:\OpenCV3\opencv\sources\modules\videoio\include;C:\OpenCV3\opencv\sources\modules\imgcodecs\include;C:\OpenCV3\opencv\sources\modules\cudawarping\include;C:\OpenCV3\opencv\sources\modules\cudaimgproc\include;C:\OpenCV3\opencv\sources\modules\cudafilters\include;C:\OpenCV3\opencv\sources\modules\video\include;C:\OpenCV3\opencv\sources\modules\ml\include;C:\OpenCV3\opencv\sources\modules\imgproc\include;C:\OpenCV3\opencv\sources\modules\flann\include;C:\OpenCV3\opencv\sources\modules\cudaarithm\include;C:\OpenCV3\opencv\sources\modules\core\include;C:\OpenCV3\opencv\sources\modules\cudev\include;C:\OpenCV3\opencv\sources\modules\cudaoptflow\include;C:\OpenCV3\opencv\sources\modules\cudaobjdetect\include;C:\OpenCV3\opencv\sources\modules\cudastereo\include;C:\OpenCV3\opencv\sources\modules\cudabgsegm\include;C:\OpenCV3\opencv\sources\modules\cudafeatures2d\include;C:\OpenCV3\opencv\sources\modules\superres\include;C:\OpenCV3\opencv\sources\3rdparty\ippicv\unpack\ippicv_win\include;C:\OpenCV3\build;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64;C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;C:\OpenCV3\opencv\sources\3rdparty\ippicv\unpack\ippicv_win\lib\intel64\ippicvmt.lib;cudart.lib;nppc.lib;nppi.lib;npps.lib;cufft.lib;-LC:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/x64;..\..\lib\Release\opencv_superres310.lib;..\..\lib\Release\opencv_cudafeatures2d310.lib;..\..\lib\Release\opencv_cudaoptflow310.lib;..\..\lib\Release\opencv_cudabgsegm310.lib;..\..\lib\Release\opencv_cudastereo310.lib;..\..\lib\Release\opencv_cudaobjdetect310.lib;..\..\lib\Release\opencv_xfeatures2d310.lib;..\..\lib\Release\opencv_cudacodec310.lib;..\..\lib\Release\opencv_cudawarping310.lib;..\..\lib\Release\opencv_cudalegacy310.lib;..\..\lib\Release\opencv_objdetect310.lib;..\..\lib\Release\opencv_cudaimgproc310.lib;..\..\lib\Release\opencv_cudafilters310.lib;..\..\lib\Release\opencv_calib3d310.lib;..\..\lib\Release\opencv_features2d310.lib;..\..\lib\Release\opencv_flann310.lib;..\..\lib\Release\opencv_highgui310.lib;..\..\lib\Release\opencv_videoio310.lib;..\..\lib\Release\opencv_imgcodecs310.lib;..\..\lib\Release\opencv_ml310.lib;..\..\lib\Release\opencv_cudaarithm310.lib;..\..\lib\Release\opencv_shape310.lib;..\..\lib\Release\opencv_video310.lib;..\..\lib\Release\opencv_imgproc310.lib;..\..\lib\Release\opencv_core310.lib;..\..\lib\Release\opencv_cudev310.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="HDTimer.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="SteinCropper.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HDTimer.h" />
+    <ClInclude Include="SteinCropper.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
