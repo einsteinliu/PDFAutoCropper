@@ -31,9 +31,13 @@ public:
 	Mat cropTheImage(string file);
 	void showDebugImage(cuda::GpuMat& gmat);
 	void showDebugImage(Mat& mat);
+	void saveProj(Mat &proj);
+	bool checkIsTextBlock(Mat& patch);
 private:
 	vector<string> images;
-	vector<double> roughAngles;
 	double maxAbsDiff(Mat &proj);
+	vector<cv::Rect> detectAllTextCells(Mat &correctedImage);
+	Point getTextPart(Mat &proj, vector<Rect> &textBlocks);
+	double computeBestAngle(Mat &image, vector<double> angles);
 };
 

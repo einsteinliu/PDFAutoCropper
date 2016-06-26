@@ -23,7 +23,7 @@ using namespace cv;
 int main()
 {
 	SteinCropper stCropper;
-	stCropper.loadFiles(L".\\*.*");
+	stCropper.loadFiles(L"Foucault");
 	return 0;
 	int k;
 	Timer timer;
